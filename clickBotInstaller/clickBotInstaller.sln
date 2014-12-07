@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreDeployer", "PreDeployer\PreDeployer.csproj", "{DA8806E4-C270-4F77-91A3-649CA8C4BF8F}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "clickBotSetup", "WeDoSetup\WeDoSetup.vdproj", "{FB00136D-77D7-46BF-8458-F86D41EC0A9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAction", "CustomAction\CustomAction.csproj", "{81AF54F4-12EB-4E48-B098-AA5B1A133D38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "clickbot", "..\clickBotClient\clickbot.csproj", "{2063864C-68F5-4761-9688-CD5A06BA3EB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA8806E4-C270-4F77-91A3-649CA8C4BF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA8806E4-C270-4F77-91A3-649CA8C4BF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA8806E4-C270-4F77-91A3-649CA8C4BF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA8806E4-C270-4F77-91A3-649CA8C4BF8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB00136D-77D7-46BF-8458-F86D41EC0A9D}.Debug|Any CPU.ActiveCfg = Debug
+		{FB00136D-77D7-46BF-8458-F86D41EC0A9D}.Release|Any CPU.ActiveCfg = Release
+		{81AF54F4-12EB-4E48-B098-AA5B1A133D38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81AF54F4-12EB-4E48-B098-AA5B1A133D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81AF54F4-12EB-4E48-B098-AA5B1A133D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81AF54F4-12EB-4E48-B098-AA5B1A133D38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2063864C-68F5-4761-9688-CD5A06BA3EB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2063864C-68F5-4761-9688-CD5A06BA3EB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2063864C-68F5-4761-9688-CD5A06BA3EB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2063864C-68F5-4761-9688-CD5A06BA3EB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VSStyle = Office2007 (Black).vssf
+		VSTargetControls = FormsAndControls
+		VSToolStripStyle = Mixed
+		VSTextShadow = True
+		VSSkinFlatStyles = True
+		VSSkinToggleButtons = True
+		VSUseSystemFonts = False
+		VSCustomBkgrdPaint = False
+	EndGlobalSection
+EndGlobal
