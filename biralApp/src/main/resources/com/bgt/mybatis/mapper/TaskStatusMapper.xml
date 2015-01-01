@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgt.mybatis.mapper.TaskStatusMapper">
+
+    <resultMap id="taskStausMap" type="com.bgt.mybatis.vo.TaskStatus">
+		<result property="taskId"   column="task_id"/>    
+		<result property="serverId"   column="server_id"/>    
+		<result property="workTime"   column="work_time"/>    
+		<result property="rank"       column="rank"/>           
+		<result property="dayHitCount"   column="day_hit_count"/>           
+		<result property="curHitCount"   column="cur_hit_count"/>           
+		<result property="ipAddress"   column="ip_address"/>           
+		<result property="updateDate"   column="update_date"/>           
+    </resultMap>
+
+    <select id="selectAll" resultMap="taskStausMap">
+        SELECT  * FROM task_status
+    </select>
+
+    <select id="selectOne" resultMap="taskStausMap"  parameterType="map">
+        SELECT  * FROM task_status
+         WHERE task_id = #{taskId} and server_id = #{serverId} and work_time = #{workTime}
+    </select>
+
+     <insert id="insert"  parameterType= "com.bgt.mybatis.vo.TaskStatus" >
+         INSERT INTO task_status ( task_id, server_id, work_time, rank, day_hit_count, cur_hit_count,  ip_address, update_date ) VALUES (
+                #{taskId}
+              , #{serverId}
+              , #{workTime}
+              , #{rank}
+              , #{dayHitCount}
+              , #{curHitCount}
+              , #{ipAddress}
+              ,date_format(sysdate(),'%Y%m%d%H%i%s')
+         )
+    </insert>
+    <update id="update" parameterType= "com.bgt.mybatis.vo.TaskStatus" >
+         UPDATE task_status SET
+         	  rank = #{rank},
+              day_hit_count = #{dayHitCount},
+              cur_hit_count = #{curHitCount},
+              update_date = date_format(sysdate(),'%Y%m%d%H%i%s')
+         WHERE task_id = #{taskId} and server_id = #{serverId} and work_time = #{workTime}
+    </update>
+	
+	<select id="selectMaxDate" resultType="String">
+      SELECT  date_format(sysdate() + interval 1 hour,'%Y%m%d%H')
+    </select>
+	<select id="selectCurDate" resultType="String">
+      SELECT  date_format(sysdate(),'%Y%m%d%H')
+    </select>
+    
+	<select id="selectMaxWorkTime" resultType="String" parameterType="map">
+		<![CDATA[
+		      SELECT  max(work_time) from task_status 
+		       where work_time >= date_format(sysdate(),'%Y%m%d%H')
+		      		and server_id = #{serverId}
+		       
+		]]>
+    </select>
+    
+	<!-- 
+    <delete id="delete">
+         DELETE FROM bbs WHERE idx = #{idx}
+    </delete> -->
+
+</mapper>

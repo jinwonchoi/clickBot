@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgt.mybatis.mapper.IpInfoMapper">
+
+    <resultMap id="ipInfoMap" type="com.bgt.mybatis.vo.IpInfo">
+		<result property="ipAddress"       column="ip_address"/>           
+		<result property="browserType"   column="browser_type"/>           
+		<result property="deviceType"       column="device_type"/>           
+		<result property="useType"        column="use_type"/>           
+		<result property="loginIdNaver"    column="login_id_naver"/>           
+		<result property="loginPwdNaver" column="login_pwd_naver"/>           
+		<result property="loginIdDaum"     column="login_id_daum"/>           
+		<result property="loginPwdDaum"  column="login_pwd_daum"/>           
+    </resultMap>
+
+    <select id="selectAll" resultMap="ipInfoMap">
+        SELECT  * FROM ipInfo
+    </select>
+
+    <select id="selectByDeviceType" resultMap="ipInfoMap" parameterType="String">
+        SELECT  * FROM ipinfo WHERE device_type = #{deviceType}
+    </select>
+
+    <select id="selectOne" resultMap="ipInfoMap">
+        SELECT  * FROM ipinfo WHERE ip_address = #{ipAddress}
+    </select>
+
+<!--     <insert id="insert">
+         INSERT INTO bbs ( user_name, subject, content, reg_datetime ) VALUES (
+                #{user_name}
+              , #{subject}
+              , #{content}
+              , #{reg_datetime}
+         )
+    </insert>
+
+    <update id="update">
+         UPDATE bbs SET
+              user_name = #{user_name},
+              subject = #{subject},
+              content = #{content},
+              reg_datetime = #{reg_datetime}
+         WHERE idx = #{idx} LIMIT 1
+    </update>
+
+    <delete id="delete">
+         DELETE FROM bbs WHERE idx = #{idx}
+    </delete> -->
+
+</mapper>

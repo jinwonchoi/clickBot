@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgt.mybatis.mapper.TaskScheduleMapper">
+
+    <resultMap id="taskScheduleMap" type="com.bgt.mybatis.vo.TaskSchedule">
+		<result property="serverId"   column="server_id"/>           
+		<result property="ipAddress"       column="ip_address"/>           
+		<result property="browserType"   column="browser_type"/>           
+		<result property="deviceType"      column="device_type"/>       
+		<result property="executeDate"   column="execute_date"/>           
+		<result property="workHour"   column="work_hour"/>           
+		<result property="jobList"   column="job_list"/>           
+		<result property="updateDate"   column="update_date"/>           
+    </resultMap>
+
+    <select id="selectAll" resultMap="taskScheduleMap">
+        SELECT  * FROM task_schedule
+    </select>
+
+    <select id="selectOne" resultMap="taskScheduleMap">
+        SELECT  * FROM task_schedule WHERE server_id = #{serverId}
+    </select>
+    
+    <select id="selectByDateTime" resultMap="taskScheduleMap"  parameterType="map">
+        SELECT  * FROM task_schedule 
+         WHERE execute_date = #{executeDate}
+              and work_hour = #{workHour} 
+    </select>
+
+    <select id="selectByServerId" resultMap="taskScheduleMap">
+        SELECT  * FROM task_schedule 
+         WHERE server_id = #{serverId}
+             and execute_date = #{executeDate}
+             and work_hour = #{workHour} 
+    </select>
+
+     <insert id="insert" parameterType= "com.bgt.mybatis.vo.TaskSchedule" >
+         INSERT INTO task_schedule ( server_id, ip_address, browser_type, device_type,  execute_date, work_hour, job_list, update_date ) VALUES (
+                #{serverId}
+              , #{ipAddress}
+              , #{browserType}
+              , #{deviceType}
+              , #{executeDate}
+              , #{workHour}
+              , #{jobList}
+              , date_format(sysdate(),'%Y%m%d%H%i%s')
+         )
+    </insert>
+<!-- 
+    <update id="update">
+         UPDATE bbs SET
+              user_name = #{user_name},
+              subject = #{subject},
+              content = #{content},
+              reg_datetime = #{reg_datetime}
+         WHERE idx = #{idx} LIMIT 1
+    </update> -->
+
+    <delete id="delete">
+         DELETE FROM task_schedule 
+         WHERE server_id = #{serverId}
+             and execute_date = #{executeDate}
+             and work_hour = #{workHour} 
+    </delete>
+
+</mapper>

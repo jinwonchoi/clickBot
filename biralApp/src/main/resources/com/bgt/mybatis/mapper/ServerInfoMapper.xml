@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgt.mybatis.mapper.ServerInfoMapper">
+
+    <resultMap id="serverInfoMap" type="com.bgt.mybatis.vo.ServerInfo">
+		<result property="serverId"   column="server_id"/>           
+		<result property="serverName"   column="server_name"/>           
+		<result property="realIpAddress"       column="real_ip_address"/>           
+		<result property="runStatus"       column="run_status"/>           
+    </resultMap>
+
+    <select id="selectAll" resultMap="serverInfoMap">
+        SELECT  * FROM server_Info
+    </select>
+
+    <select id="selectOne" resultMap="serverInfoMap">
+        SELECT  * FROM server_info WHERE server_id = #{serverId}
+    </select>
+
+    <select id="selectAvailable" resultMap="serverInfoMap">
+        SELECT  * FROM server_info WHERE server_id in
+	  <foreach item="item" index="index" collection="list"
+	      open="(" separator="," close=")">
+	        #{item}
+	  </foreach>
+	  and run_status = 'S'
+    </select>
+    
+    <update id="update"  parameterType="map">
+         UPDATE server_info SET
+         	  run_status = #{runStatus}
+         WHERE server_id = #{serverId}
+    </update>
+    
+<!--     <insert id="insert">
+         INSERT INTO bbs ( user_name, subject, content, reg_datetime ) VALUES (
+                #{user_name}
+              , #{subject}
+              , #{content}
+              , #{reg_datetime}
+         )
+    </insert>
+
+    <update id="update">
+         UPDATE bbs SET
+              user_name = #{user_name},
+              subject = #{subject},
+              content = #{content},
+              reg_datetime = #{reg_datetime}
+         WHERE idx = #{idx} LIMIT 1
+    </update>
+
+    <delete id="delete">
+         DELETE FROM bbs WHERE idx = #{idx}
+    </delete> -->
+
+</mapper>

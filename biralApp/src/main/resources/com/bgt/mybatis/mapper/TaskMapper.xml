@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bgt.mybatis.mapper.TaskMapper">
+
+    <resultMap id="taskMap" type="com.bgt.mybatis.vo.Task">
+		<result property="taskId"          column="task_id"/>             
+		<result property="purchaseId"      column="purchase_id"/>       
+		<result property="deviceType"      column="device_type"/>       
+		<result property="siteType"        column="site_type"/>         
+		<result property="startDate"       column="start_date"/>        
+		<result property="endDate"         column="end_date"/>          
+		<result property="taskType"        column="task_type"/>         
+		<result property="targetUrl"       column="target_url"/>        
+		<result property="targetName"      column="target_name"/>       
+		<result property="pageId"      column="page_id"/>       
+		<result property="keyword1"        column="keyword1"/>          
+		<result property="keyword2"        column="keyword2"/>          
+		<result property="keyword3"        column="keyword3"/>          
+		<result property="keyword4"        column="keyword4"/>          
+		<result property="blogLikeCount"   column="blog_like_count"/>   
+		<result property="dailyHitCount"   column="daily_hit_count"/>   
+		<result property="hourHitCount"  column="hour_hit_count"/>  
+ 		<result property="createDate"      column="create_date"/>       
+		<result property="updateDate"      column="update_date"/>       
+    </resultMap>
+
+		<!-- <result property="hour01HitCount"  column="hour01_hit_count"/> -->  
+<!-- 		<result property="hour01HitCount"  column="hour01_hit_count"/>  
+		<result property="hour02HitCount"  column="hour02_hit_count"/>  
+		<result property="hour03HitCount"  column="hour03_hit_count"/>  
+		<result property="hour04HitCount"  column="hour04_hit_count"/>  
+		<result property="hour05HitCount"  column="hour05_hit_count"/>  
+		<result property="hour06HitCount"  column="hour06_hit_count"/>  
+		<result property="hour07HitCount"  column="hour07_hit_count"/>  
+		<result property="hour08HitCount"  column="hour08_hit_count"/>  
+		<result property="hour09HitCount"  column="hour09_hit_count"/>  
+		<result property="hour10HitCount"  column="hour10_hit_count"/>  
+		<result property="hour11HitCount"  column="hour11_hit_count"/>  
+		<result property="hour12HitCount"  column="hour12_hit_count"/>  
+		<result property="hour13HitCount"  column="hour13_hit_count"/>  
+		<result property="hour14HitCount"  column="hour14_hit_count"/>  
+		<result property="hour15HitCount"  column="hour15_hit_count"/>  
+		<result property="hour16HitCount"  column="hour16_hit_count"/>  
+		<result property="hour17HitCount"  column="hour17_hit_count"/>  
+		<result property="hour18HitCount"  column="hour18_hit_count"/>  
+		<result property="hour19HitCount"  column="hour19_hit_count"/>  
+		<result property="hour20HitCount"  column="hour20_hit_count"/>  
+		<result property="hour21HitCount"  column="hour21_hit_count"/>  
+		<result property="hour22HitCount"  column="hour22_hit_count"/>  
+		<result property="hour23HitCount"  column="hour23_hit_count"/>  
+		<result property="hour24HitCount"  column="hour24_hit_count"/>  
+ -->
+
+    <select id="selectAll" resultMap="taskMap">
+        SELECT  * FROM task
+    </select>
+
+    <select id="selectOne" resultMap="taskMap">
+        SELECT  * FROM task WHERE task_id = #{taskId}
+    </select>
+
+	<!--  -->
+    <select id="selectAvailMobileList"  resultMap="taskMap" >
+        SELECT  
+					 task_id,purchase_id,device_type, site_type     
+					,start_date
+					,end_date
+					,task_type,target_url,target_name,page_id,keyword1,keyword2,keyword3,keyword4,blog_like_count,daily_hit_count,
+ 			    <if test="workHour == 0">  hour00_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 1">  hour01_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 2">  hour02_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 3">  hour03_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 4">  hour04_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 5">  hour05_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 6">  hour06_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 7">  hour07_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 8">  hour08_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 9">  hour09_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 10"> hour10_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 11"> hour11_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 12"> hour12_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 13"> hour13_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 14"> hour14_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 15"> hour15_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 16"> hour16_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 17"> hour17_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 18"> hour18_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 19"> hour19_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 20"> hour20_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 21"> hour21_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 22"> hour22_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 23"> hour23_hit_count hour_hit_count,</if> 
+			    	 create_date,update_date
+           FROM task 
+    		<![CDATA[
+         WHERE daily_hit_count > 0
+              and start_date <= date_format(sysdate(),'%Y%m%d') 
+              and end_date >= date_format(sysdate(),'%Y%m%d') 
+ 		      and task_id < 7700100
+		]]>
+              and device_type = 'M'
+ 			    <if test="workHour ==  0"> AND hour00_hit_count >0</if>  
+			    <if test="workHour ==  1"> AND hour01_hit_count >0</if>  
+			    <if test="workHour ==  2"> AND hour02_hit_count >0</if>  
+			    <if test="workHour ==  3"> AND hour03_hit_count >0</if>  
+			    <if test="workHour ==  4"> AND hour04_hit_count >0</if>  
+			    <if test="workHour ==  5"> AND hour05_hit_count >0</if>  
+			    <if test="workHour ==  6"> AND hour06_hit_count >0</if>  
+			    <if test="workHour ==  7"> AND hour07_hit_count >0</if>  
+			    <if test="workHour ==  8"> AND hour08_hit_count >0</if>  
+			    <if test="workHour ==  9"> AND hour09_hit_count >0</if> 
+			    <if test="workHour == 10"> AND hour10_hit_count >0</if> 
+			    <if test="workHour == 11"> AND hour11_hit_count >0</if> 
+			    <if test="workHour == 12"> AND hour12_hit_count >0</if> 
+			    <if test="workHour == 13"> AND hour13_hit_count >0</if> 
+			    <if test="workHour == 14"> AND hour14_hit_count >0</if> 
+			    <if test="workHour == 15"> AND hour15_hit_count >0</if> 
+			    <if test="workHour == 16"> AND hour16_hit_count >0</if> 
+			    <if test="workHour == 17"> AND hour17_hit_count >0</if> 
+			    <if test="workHour == 18"> AND hour18_hit_count >0</if> 
+			    <if test="workHour == 19"> AND hour19_hit_count >0</if> 
+			    <if test="workHour == 20"> AND hour20_hit_count >0</if> 
+			    <if test="workHour == 21"> AND hour21_hit_count >0</if> 
+			    <if test="workHour == 22"> AND hour22_hit_count >0</if> 
+			    <if test="workHour == 23"> AND hour23_hit_count >0</if> 
+	</select>
+
+    <select id="selectAvailWebList" resultMap="taskMap" >
+        SELECT  
+					 task_id,purchase_id,device_type, site_type     
+					,start_date
+					,end_date
+					,task_type,target_url,target_name,page_id,keyword1,keyword2,keyword3,keyword4,blog_like_count,daily_hit_count,
+ 			    <if test="workHour == 0">  hour00_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 1">  hour01_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 2">  hour02_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 3">  hour03_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 4">  hour04_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 5">  hour05_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 6">  hour06_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 7">  hour07_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 8">  hour08_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 9">  hour09_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 10"> hour10_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 11"> hour11_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 12"> hour12_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 13"> hour13_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 14"> hour14_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 15"> hour15_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 16"> hour16_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 17"> hour17_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 18"> hour18_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 19"> hour19_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 20"> hour20_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 21"> hour21_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 22"> hour22_hit_count hour_hit_count,</if> 
+			    <if test="workHour == 23"> hour23_hit_count hour_hit_count,</if> 
+				     create_date,update_date
+           FROM task 
+    		<![CDATA[
+         WHERE daily_hit_count > 0
+              and start_date <= date_format(sysdate(),'%Y%m%d') 
+              and end_date >= date_format(sysdate(),'%Y%m%d') 
+ 		      and task_id < 7700100
+		]]>
+              and device_type = 'W'
+ 			    <if test="workHour ==  0"> AND hour00_hit_count >0</if>  
+			    <if test="workHour ==  1"> AND hour01_hit_count >0</if>  
+			    <if test="workHour ==  2"> AND hour02_hit_count >0</if>  
+			    <if test="workHour ==  3"> AND hour03_hit_count >0</if>  
+			    <if test="workHour ==  4"> AND hour04_hit_count >0</if>  
+			    <if test="workHour ==  5"> AND hour05_hit_count >0</if>  
+			    <if test="workHour ==  6"> AND hour06_hit_count >0</if>  
+			    <if test="workHour ==  7"> AND hour07_hit_count >0</if>  
+			    <if test="workHour ==  8"> AND hour08_hit_count >0</if>  
+			    <if test="workHour ==  9"> AND hour09_hit_count >0</if> 
+			    <if test="workHour == 10"> AND hour10_hit_count >0</if> 
+			    <if test="workHour == 11"> AND hour11_hit_count >0</if> 
+			    <if test="workHour == 12"> AND hour12_hit_count >0</if> 
+			    <if test="workHour == 13"> AND hour13_hit_count >0</if> 
+			    <if test="workHour == 14"> AND hour14_hit_count >0</if> 
+			    <if test="workHour == 15"> AND hour15_hit_count >0</if> 
+			    <if test="workHour == 16"> AND hour16_hit_count >0</if> 
+			    <if test="workHour == 17"> AND hour17_hit_count >0</if> 
+			    <if test="workHour == 18"> AND hour18_hit_count >0</if> 
+			    <if test="workHour == 19"> AND hour19_hit_count >0</if> 
+			    <if test="workHour == 20"> AND hour20_hit_count >0</if> 
+			    <if test="workHour == 21"> AND hour21_hit_count >0</if> 
+			    <if test="workHour == 22"> AND hour22_hit_count >0</if> 
+			    <if test="workHour == 23"> AND hour23_hit_count >0</if>  
+      </select>
+
+ <!--    <insert id="insert">
+         INSERT INTO bbs ( user_name, subject, content, reg_datetime ) VALUES (
+                #{user_name}
+              , #{subject}
+              , #{content}
+              , #{reg_datetime}
+         )
+    </insert>
+
+    <update id="update">
+         UPDATE bbs SET
+              user_name = #{user_name},
+              subject = #{subject},
+              content = #{content},
+              reg_datetime = #{reg_datetime}
+         WHERE idx = #{idx} LIMIT 1
+    </update>
+
+    <delete id="delete">
+         DELETE FROM bbs WHERE idx = #{idx}
+    </delete> -->
+
+</mapper>

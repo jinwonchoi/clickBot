@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+  	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+  	
+  	http://www.springframework.org/schema/context
+  	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+  	http://www.springframework.org/schema/tx
+  	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+  	http://www.springframework.org/schema/aop
+  	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/oxm
+        http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd
+  	
+  	http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
+        
+	<import resource="classpath:config/data-source-config.xml" />
+        
+<!-- ********************************************** -->
+<!-- *log4j Initialization                                  * -->
+<!-- ********************************************** -->    
+    <bean id="log4jInitialization"
+        class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.springframework.util.Log4jConfigurer">
+        </property>
+        <property name="targetMethod" value="initLogging">
+        </property>
+        <property name="arguments">
+            <list>
+                <value>
+                    file:#{systemProperties['app_home']}/conf/main.properties
+                </value>
+            </list>
+        </property>
+    </bean> 
+            
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="envProp">
+	<property value=" file:#{systemProperties['app_home']}/conf/main.properties" name="location"/>
+	</bean>
+
+<!-- 	<bean
+		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" id="envProp">
+		<property name="locations">
+			<list>
+				<value>classpath:config/env.properties</value>
+			</list>
+		</property>
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+	</bean> -->
+<!-- 
+<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" id="mainProp">
+ <property name="location" value="classpath:config/main.properties"/>
+ </bean>	 -->
+	     
+<!--  	<bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+	  <property name="locations">
+	    <list>
+	      <value>classpath:properties/main.properties</value>
+	    </list>
+	  </property>
+	  <property name="ignoreUnresolvablePlaceholders" value="true"/>
+	</bean>
+ -->	<context:annotation-config/>
+  <context:component-scan base-package="com.bgt.mybatis" />
+</beans>
